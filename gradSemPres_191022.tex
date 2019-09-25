@@ -1,0 +1,162 @@
+\documentclass[14pt, unknownkeysallowed]{beamer}
+
+\usepackage{tikz}
+\usepackage{comment}
+\usepackage{fancyvrb}
+\usepackage{tikz}
+\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri}
+\usepackage{circuitikz} % for circuits!
+\usetikzlibrary{arrows.meta} % for loads
+\usepackage{float}
+\usepackage{listings}
+
+\usepackage{hyperref}
+
+\usepackage[default]{berasans}
+\renewcommand*\familydefault{\sfdefault}  %% Only if the base font of the document is to be sans serif
+\usepackage[T1]{fontenc}
+
+\setbeamertemplate{navigation symbols}{}
+\usetheme{Dresden}
+\usecolortheme{seagull}
+\usefonttheme{professionalfonts}
+
+
+%\title{Long-Term Simulation of Power System Dynamics using Time Sequenced Power Flows}
+\title{Long-Term Power System Dynamic Simulation using Time Sequenced Power-Flows}
+\author{Thad Haines}
+\institute[MT TECH]{Montana Technological University - Master's Thesis Research Project}
+\date{October 22nd, 2019}
+
+\newcounter{assumptions}
+
+\begin{document}
+	
+\begin{frame}
+	\titlepage
+\end{frame}
+
+%************************************************
+\section{Introduction}
+%________________________________________________
+\subsection{Explanation of Project}
+%------------------------------------------------
+\begin{frame}
+What is a Power System?
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+What is Dynamic Simulation?
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+What is Long-Term?
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+What is a Power Flow?
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+What are Time Sequenced Power Flows?
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+Putting it all together...
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+Project Goals:
+\begin{itemize}
+\item Develop software for (long-term dynamic) LTD simulations.
+\item Incorporate useful parts of GE software (PSLF):
+\begin{itemize}
+	\item Power Systems ($.sav$ files)
+	\item Dynamic model data ($.dyd$ files)
+	\item Power-flow solver
+\end{itemize}
+\item Create simplified dynamic models compatible with LTD time steps.
+\item Investigate long-term events.
+\begin{itemize}
+	\item Turbine governor and AGC interaction
+	\item System response to wind ramps
+\end{itemize}
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+
+%************************************************
+\section{Simulation Model}
+%________________________________________________
+\subsection{Assumptions, Coding Decisions, Approaches, and Software Operation.}
+%------------------------------------------------
+\begin{frame}
+This simulation assumes:
+\begin{enumerate}
+\item Time steps of 0.5 to 1 second.
+\item Fast dynamics are 'mostly' ignored.
+\item System remains synchronized.
+\item System frequency is described by the combined PU swing equation:
+\setcounter{assumptions}{\value{enumi}} % allow for break in counting
+\end{enumerate}
+\[ \dot{\omega}_{sys} = \dfrac{1}{2H_{sys} } \left( \dfrac{P_{acc, sys} }{\omega_{sys}(t)} - D_{sys}\Delta\omega_{sys}(t)  \right)\] 
+\begin{enumerate}
+\setcounter{enumi}{\value{assumptions}}
+\item No system damping $(D_{sys} = 0)$.
+\end{enumerate}
+\end{frame}
+%------------------------------------------------
+
+\begin{frame}
+Software used:
+\begin{itemize}
+\item Python 3, IronPython
+\item Erlang / AMQP
+\item MATLAB
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\begin{itemize}
+\item Agent\\ An autonomous individual object with properties and methods in a computer simulation.
+\item Agent-Based Modeling\\ The idea that a system can be modeled using agents in an environment, and a description of agent-agent and agent-environment interactions. \tiny[2]
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+
+%************************************************
+\section{Current Conclusions}
+%------------------------------------------------
+\begin{frame}
+Current Conclusions
+\begin{itemize}
+	\item Software (PSLTDSim) produces valid output for small to medium size systems.
+	\item Governor and AGC interactions can happen easily
+	\item Deadbands and conditional logic should be used to limit governor and AGC conflicts
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+Future Work
+\begin{itemize}
+\item Incorporation of more PSLF type objects into simulation.
+\item Creation of additional dynamic models and agents.
+\item Addition of definite time controller.
+\item Departure from reliance on GE software.
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+References\vspace{1em}\\
+%\resizebox{.8\textwidth}{.4\textheight}{
+\begin{minipage}{\textwidth}
+\footnotesize
+\begin{itemize}
+\item[[1] GE Energy. "Mechanics of Running PSLF Dynamics" Phoenix, AZ, 2015
+\item[[2] Rand, W. (2018). Agent-Based Modeling: What is Agent-Based Modeling? [Online] Available: https://www.youtube.com/watch?v=FVmQbfsOkGc
+\item[[3] P.M. Anderson and A.A. Fouad, Power System Control and Stability, 2nd ed. IEEE Press, 2003, p20.
+\end{itemize}
+\end{minipage}
+%}
+\end{frame}
+\end{document}

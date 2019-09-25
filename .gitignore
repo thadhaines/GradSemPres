@@ -3,3 +3,10 @@
 ################################################################################
 
 /.vs/slnx.sqlite
+*.aux
+*.log
+/gradSemPres_191022.toc
+/gradSemPres_191022.synctex.gz
+/gradSemPres_191022.snm
+/gradSemPres_191022.out
+/gradSemPres_191022.nav
