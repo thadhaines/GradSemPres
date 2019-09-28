@@ -23,7 +23,7 @@
 
 
 %\title{Long-Term Simulation of Power System Dynamics using Time Sequenced Power Flows}
-\title{Long-Term Power System Dynamic Simulation using Time Sequenced Power-Flows}
+\title{Long-Term Power System Dynamic Simulation using Time-Sequenced \\ Power Flows}
 \author{Thad Haines}
 \institute[MT TECH]{Montana Technological University - Master's Thesis Research Project}
 \date{October 22nd, 2019}
@@ -42,31 +42,78 @@
 \subsection{Explanation of Project}
 %------------------------------------------------
 \begin{frame}
-What is a Power System?
+\frametitle{What is Long-Term?}
+% Insert timeScales Graph Here
+Long-term describes the amount of time required for events of interest to occur and the simulation length to be executed. \\
+\vspace{1em}
+In this case: 10 to 60 minutes
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-What is Dynamic Simulation?
+\frametitle{What is a Power System?}
+% 3 Area MiniWECC picture?
+Electrical supply connected to demand.\\
+\vspace{1em}
+Power plants connected via transmission lines to cities in different areas. \\
+\vspace{1em}
+A part of `The Grid'.
+% picture of north american interconnections
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-What is Long-Term?
+\frametitle{What is Dynamic Simulation?}
+A computer's mathematical estimation of how a system will change over time.\\% in response to certain inputs and known starting conditions.\\ % Simulation of system changing over time
+\vspace{1em}
+How certain qualities of a power system may change over time in response to a known perturbance.
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-What is a Power Flow?
+\frametitle{What is a Power Flow?}
+A steady state solution to all bus voltages, bus voltage angles, and real  and reactive power of a system.\\
+\vspace{1em}
+A \emph{snapshot} of a power system. \\% not dynamic
+\vspace{1em}
+Power flows are do not care about time.
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-What are Time Sequenced Power Flows?
+\frametitle{Time-Sequenced Power Flows?}
+Multiple power flows arranged in a way to give the allusion of time.\\
+\vspace{1em}
+A \emph{flip book} of \emph{snapshots}.\\
+\vspace{1em}
+Allows for additional dynamics to be calculated between \emph{snaps}.\\(i.e frequency, valve position, \ldots )\\
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-Putting it all together...
+\frametitle{So, what's happening?}
+Essentially:
+\begin{itemize}
+	\item Executing computer simulations of the power grid that are  over 10 minutes long.
+	\item Simulation `time steps' are a sequence of power flows (\emph{snapshots})
+	\item Additional dynamic calculations are performed between each `time step'.
+\end{itemize}
+
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-Project Goals:
+\frametitle{And why?}
+To study engineering problems involving:
+\begin{itemize}
+	\item Long-term events (i.e. Wind Ramps)
+	\item Multi-Area Power Interactions
+	\begin{itemize}
+		\item Inadvertent Interchange
+		\item Turbine governor settings
+		\item Automatic Generation Control Settings
+		\item Governor and AGC interaction
+	\end{itemize}
+	\item Ways to reduce Machine effort while meeting reliability standards.
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Project Software Goals}
 \begin{itemize}
 \item Develop software for (long-term dynamic) LTD simulations.
 \item Incorporate useful parts of GE software (PSLF):
@@ -76,15 +123,37 @@ Project Goals:
 	\item Power-flow solver
 \end{itemize}
 \item Create simplified dynamic models compatible with LTD time steps.
-\item Investigate long-term events.
-\begin{itemize}
-	\item Turbine governor and AGC interaction
-	\item System response to wind ramps
-\end{itemize}
 \end{itemize}
 \end{frame}
-%------------------------------------------------
 
+%------------------------------------------------
+%************************************************
+\section{Background Information}
+%________________________________________________
+\subsection{Key Concepts Involved with Power Systems}
+%------------------------------------------------
+\begin{frame}
+Frequency, Accelerating power and Inertia.\\
+Direct link - electric demand always met. If there isn't enough generation, the kinetic energy stored as a moving inertia in a generator is converted to electric energy and the generator slows down.
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+Governors Defined:\\
+Turbine speed governors adjust a machines mechanical power to stop frequency decline. Input is frequency deviation and current operating set point. Primary control.
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+Automatic Governor Control Defined\\
+(AKA Load Frequency Control)
+\\
+Adjusts generator nominal operating set point to remove any inadvertent interchange and restore system frequency to 60 Hz. Secondary Control.
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+Multi Area Interactions \\
+
+Areas import or export power to each other.
+\end{frame}
 %************************************************
 \section{Simulation Model}
 %________________________________________________
@@ -125,10 +194,10 @@ Software used:
 %------------------------------------------------
 
 %************************************************
-\section{Current Conclusions}
+\section{Final Bits}
 %------------------------------------------------
 \begin{frame}
-Current Conclusions
+\frametitle{Current Conclusions}
 \begin{itemize}
 	\item Software (PSLTDSim) produces valid output for small to medium size systems.
 	\item Governor and AGC interactions can happen easily
@@ -137,12 +206,10 @@ Current Conclusions
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-Future Work
+\frametitle{Continuing Work}
 \begin{itemize}
-\item Incorporation of more PSLF type objects into simulation.
-\item Creation of additional dynamic models and agents.
-\item Addition of definite time controller.
-\item Departure from reliance on GE software.
+\item Further experiment with AGC and turbine speed governor settings
+\item Use valve travel and system reliability as engineering measuring sticks.
 \end{itemize}
 \end{frame}
 %------------------------------------------------
@@ -159,4 +226,19 @@ References\vspace{1em}\\
 \end{minipage}
 %}
 \end{frame}
+\begin{frame}
+\centering{Questions?}
+\end{frame}
+
+\begin{comment}
+\frametitle{And why?}
+\begin{itemize}
+\item Simplification
+\item Facilitate other research
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Engineering Areas of Interest}
+\end{comment}
 \end{document}
