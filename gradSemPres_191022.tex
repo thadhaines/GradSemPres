@@ -12,6 +12,13 @@
 
 \usepackage{hyperref}
 
+\usepackage[backend=biber,style=ieee, % bibliography style may be changed
+sorting=nyt % sorts by author, year, title
+]{biblatex}
+\addbibresource{../Thesis/template/biliography.bib}
+\nocite{*} % include non referenced citations
+\setbeamertemplate{bibliography item}{\insertbiblabel} % number refs...?
+
 \usepackage[default]{berasans}
 \renewcommand*\familydefault{\sfdefault}  %% Only if the base font of the document is to be sans serif
 \usepackage[T1]{fontenc}
@@ -213,22 +220,20 @@ Software used:
 \end{itemize}
 \end{frame}
 %------------------------------------------------
+
 \begin{frame}
-References\vspace{1em}\\
-%\resizebox{.8\textwidth}{.4\textheight}{
-\begin{minipage}{\textwidth}
-\footnotesize
-\begin{itemize}
-\item[[1] GE Energy. "Mechanics of Running PSLF Dynamics" Phoenix, AZ, 2015
-\item[[2] Rand, W. (2018). Agent-Based Modeling: What is Agent-Based Modeling? [Online] Available: https://www.youtube.com/watch?v=FVmQbfsOkGc
-\item[[3] P.M. Anderson and A.A. Fouad, Power System Control and Stability, 2nd ed. IEEE Press, 2003, p20.
-\end{itemize}
-\end{minipage}
-%}
+\centering{\Huge{Questions?}}
 \end{frame}
-\begin{frame}
-\centering{Questions?}
+
+%-------------------------------------------------
+% attempt at having references in slide...
+\begin{frame}[allowframebreaks]
+\frametitle{References}
+\renewcommand*{\bibfont}{\scriptsize} % makes references a resonable size
+\printbibliography
 \end{frame}
+
+
 
 \begin{comment}
 \frametitle{And why?}
