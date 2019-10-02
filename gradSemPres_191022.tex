@@ -12,6 +12,11 @@
 
 \usepackage{hyperref}
 
+% For figure usage and linking
+\usepackage{graphicx}
+\graphicspath{ {figures/} }
+
+% bibiliography
 \usepackage[backend=biber,style=ieee, % bibliography style may be changed
 sorting=nyt % sorts by author, year, title
 ]{biblatex}
@@ -30,7 +35,7 @@ sorting=nyt % sorts by author, year, title
 
 
 %\title{Long-Term Simulation of Power System Dynamics using Time Sequenced Power Flows}
-\title{Long-Term Power System Dynamic Simulation using Time-Sequenced \\ Power Flows}
+\title{Power System Long-Term Dynamic Simulation using Time-Sequenced \\Power Flows}
 \author{Thad Haines}
 \institute[MT TECH]{Montana Technological University - Master's Thesis Research Project}
 \date{October 22nd, 2019}
@@ -44,10 +49,110 @@ sorting=nyt % sorts by author, year, title
 \end{frame}
 
 %************************************************
-\section{Introduction}
+\section{Power System}
 %________________________________________________
-\subsection{Explanation of Project}
+\subsection{Physical Structure}
 %------------------------------------------------
+\begin{frame}
+\frametitle{What is a Power System?}
+\includegraphics[width=\linewidth]{largeGrid} % image  fromhttps://www.ferc.gov/industries/electric/indus-act/reliability/blackout/ch1-3.pdf
+% 3 Area MiniWECC picture?
+Electrical supply connected to demand.\\
+%\vspace{1em}
+%Power plants connected via transmission lines to cities in different areas. \\
+%\vspace{1em}
+%A part of `The Grid'.
+% picture of north american interconnections
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{U.S. Electric Generation}
+\centering{
+\includegraphics[height=.9\textheight]{july2019map} % from https://www.eia.gov/electricity/data/eia860m/
+}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{U.S. Electric Transmission Lines}
+\centering{
+\includegraphics[width=\linewidth]{UStransmission} %from https://www.eia.gov/state/maps.php?v=Electricity
+}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Electric Transmission Lines}
+\centering{
+\includegraphics[height=.9\textheight]{xgridPlusSubs} % from Physical Security of the U.S. Power Grid.pdf
+
+}
+\end{frame}
+%------------------------------------------------
+%________________________________________________
+\subsection{Operational Structure}
+%------------------------------------------------
+\begin{frame}
+\frametitle{`People in Charge'}
+\begin{itemize}
+\item \textbf{FERC}{ \footnotesize Federal Energy Regulatory Commission}\\
+ Part of the Department of Energy
+\item \textbf{NERC}{ \footnotesize
+ North American Electric Reliability Corp.}\\
+ Aurthority granted by FERC
+ \item \textbf{Balancing Authorities} \\
+ Manage specific portions of the power system to balance supply and demand and maintain mandatory operating conditions set by FERC and NERC. % abstracted from: https://www.eia.gov/todayinenergy/detail.php?id=27152
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Six NERC Regions}
+\centering{
+\includegraphics[height=.8\textheight]{NERCregions} % from https://www.nerc.com/AboutNERC/keyplayers/Pages/default.aspx
+}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Main Interconnections}
+\centering{
+\includegraphics[height=.85\textheight]{NERCInterconnectionsEDIT} % edited from https://www.nerc.com/AboutNERC/keyplayers/Pages/default.aspx
+}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Balancing Authorities (BAs)}
+\centering{
+\href{https://www.eia.gov/realtime_grid/}%
+{\includegraphics[width=\linewidth]{BAs}} % from https://www.eia.gov/realtime_grid/
+}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{BA Action - Forcasting} \ \vspace{.5em}
+\centering{
+{\includegraphics[height=.4\textheight]{chart} 
+\includegraphics[height=.4\textheight]{chart1}} % https://www.eia.gov/realtime_grid/#/data/graphs?end=20190704T18&start=20190627T18&bas=000001&regions=0&errSeriesType=S
+}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{BA Action - Import \& Export} \ \vspace{.5em}
+\centering{
+{\includegraphics[height=.4\textheight]{chart2} 
+\includegraphics[height=.4\textheight]{chart3}} % https://www.eia.gov/realtime_grid/#/data/graphs?end=20190704T18&start=20190627T18&bas=000001&regions=0&errSeriesType=S
+}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{BA Action - Interchange Error} \ \vspace{.5em}
+\centering{
+{\includegraphics[height=.6\textheight]{chart4}} % https://www.eia.gov/realtime_grid/#/data/graphs?end=20190704T18&start=20190627T18&bas=000001&regions=0&errSeriesType=S
+}
+\end{frame}
+%------------------------------------------------
+
+%************************************************
+\section{Long-Term Dynamics}
+%________________________________________________
+\subsection{Explanation of Wording}
 \begin{frame}
 \frametitle{What is Long-Term?}
 % Insert timeScales Graph Here
@@ -55,17 +160,7 @@ Long-term describes the amount of time required for events of interest to occur 
 \vspace{1em}
 In this case: 10 to 60 minutes
 \end{frame}
-%------------------------------------------------
-\begin{frame}
-\frametitle{What is a Power System?}
-% 3 Area MiniWECC picture?
-Electrical supply connected to demand.\\
-\vspace{1em}
-Power plants connected via transmission lines to cities in different areas. \\
-\vspace{1em}
-A part of `The Grid'.
-% picture of north american interconnections
-\end{frame}
+
 %------------------------------------------------
 \begin{frame}
 \frametitle{What is Dynamic Simulation?}
@@ -73,6 +168,36 @@ A computer's mathematical estimation of how a system will change over time.\\% i
 \vspace{1em}
 How certain qualities of a power system may change over time in response to a known perturbance.
 \end{frame}
+%------------------------------------------------
+\subsection{Key Dynamic Concepts of Interest}
+%------------------------------------------------
+\begin{frame}
+Frequency, Accelerating power and Inertia.\\
+\[ \dot{\omega}_{sys} = \dfrac{1}{2H_{sys} } \left( \dfrac{P_{acc, sys} }{\omega_{sys}(t)} - D_{sys}\Delta\omega_{sys}(t)  \right)\]
+Direct link - electric demand always met. If there isn't enough generation, the kinetic energy stored as a moving inertia in a generator is converted to electric energy and the generator slows down.
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+Governors Defined:\\
+Turbine speed governors adjust a machines mechanical power to stop frequency decline. Input is frequency deviation and current operating set point. Primary control.
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+Automatic Governor Control Defined\\
+(AKA Load Frequency Control)
+\\
+Adjusts generator nominal operating set point to remove any inadvertent interchange and restore system frequency to 60 Hz. Secondary Control.
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+Multi Area Interactions \\
+
+Areas import or export power to each other.
+\end{frame}
+%************************************************
+\section{Time-Sequenced Power Flows}
+%________________________________________________
+\subsection{Explanation of Computational Approach}
 %------------------------------------------------
 \begin{frame}
 \frametitle{What is a Power Flow?}
@@ -92,11 +217,23 @@ A \emph{flip book} of \emph{snapshots}.\\
 Allows for additional dynamics to be calculated between \emph{snaps}.\\(i.e frequency, valve position, \ldots )\\
 \end{frame}
 %------------------------------------------------
+\subsection{Transient Simulation Differences}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Transient vs Long-Term Simulation}
+Time scale.
+Level of detail required.
+Equations - transient used ODE to find next steady state, LTD used ODE to find next guess of input to power flow.
+\end{frame}
+%************************************************
+\section{Recap}
+%________________________________________________
+\subsection{General Project Overview}
 \begin{frame}
 \frametitle{So, what's happening?}
 Essentially:
 \begin{itemize}
-	\item Executing computer simulations of the power grid that are  over 10 minutes long.
+	\item Executing computer simulations of the western interconnection that are  over 10 minutes long.
 	\item Simulation `time steps' are a sequence of power flows (\emph{snapshots})
 	\item Additional dynamic calculations are performed between each `time step'.
 \end{itemize}
@@ -118,6 +255,67 @@ To study engineering problems involving:
 	\item Ways to reduce Machine effort while meeting reliability standards.
 \end{itemize}
 \end{frame}
+%************************************************
+\section{Quick Results}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Quick Initial Validation}
+pictures of step event comparisons of ltd vs psds
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Quick Controller Test}
+BA controller action - do a with and without thing?
+\end{frame}
+%------------------------------------------------
+%************************************************
+\section{Final Bits}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Current Conclusions}
+\begin{itemize}
+	\item Software (PSLTDSim) produces valid output for small to medium size systems.
+	\item Governor and AGC interactions can happen easily
+	\item Deadbands and conditional logic can be used to limit governor and AGC conflicts
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Continuing Work}
+\begin{itemize}
+\item Experiments with AGC and turbine speed governor settings.
+\item Use of valve travel and system reliability as to measure validity of control regime.
+\item Expansion of software capabilities to handle full WECC.
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+
+\begin{frame}
+\centering{\Huge{Questions?}}
+\end{frame}
+
+%-------------------------------------------------
+% attempt at having references in slide...
+\begin{frame}[allowframebreaks]
+\frametitle{References}
+\renewcommand*{\bibfont}{\scriptsize} % makes references a resonable size
+\printbibliography
+\end{frame}
+
+
+
+\begin{comment}
+\frametitle{And why?}
+\begin{itemize}
+\item Simplification
+\item Facilitate other research
+\end{itemize}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Engineering Areas of Interest}
+
+
 %------------------------------------------------
 \begin{frame}
 \frametitle{Project Software Goals}
@@ -137,30 +335,7 @@ To study engineering problems involving:
 %************************************************
 \section{Background Information}
 %________________________________________________
-\subsection{Key Concepts Involved with Power Systems}
-%------------------------------------------------
-\begin{frame}
-Frequency, Accelerating power and Inertia.\\
-Direct link - electric demand always met. If there isn't enough generation, the kinetic energy stored as a moving inertia in a generator is converted to electric energy and the generator slows down.
-\end{frame}
-%------------------------------------------------
-\begin{frame}
-Governors Defined:\\
-Turbine speed governors adjust a machines mechanical power to stop frequency decline. Input is frequency deviation and current operating set point. Primary control.
-\end{frame}
-%------------------------------------------------
-\begin{frame}
-Automatic Governor Control Defined\\
-(AKA Load Frequency Control)
-\\
-Adjusts generator nominal operating set point to remove any inadvertent interchange and restore system frequency to 60 Hz. Secondary Control.
-\end{frame}
-%------------------------------------------------
-\begin{frame}
-Multi Area Interactions \\
 
-Areas import or export power to each other.
-\end{frame}
 %************************************************
 \section{Simulation Model}
 %________________________________________________
@@ -199,51 +374,5 @@ Software used:
 \end{itemize}
 \end{frame}
 %------------------------------------------------
-
-%************************************************
-\section{Final Bits}
-%------------------------------------------------
-\begin{frame}
-\frametitle{Current Conclusions}
-\begin{itemize}
-	\item Software (PSLTDSim) produces valid output for small to medium size systems.
-	\item Governor and AGC interactions can happen easily
-	\item Deadbands and conditional logic should be used to limit governor and AGC conflicts
-\end{itemize}
-\end{frame}
-%------------------------------------------------
-\begin{frame}
-\frametitle{Continuing Work}
-\begin{itemize}
-\item Further experiment with AGC and turbine speed governor settings
-\item Use valve travel and system reliability as engineering measuring sticks.
-\end{itemize}
-\end{frame}
-%------------------------------------------------
-
-\begin{frame}
-\centering{\Huge{Questions?}}
-\end{frame}
-
-%-------------------------------------------------
-% attempt at having references in slide...
-\begin{frame}[allowframebreaks]
-\frametitle{References}
-\renewcommand*{\bibfont}{\scriptsize} % makes references a resonable size
-\printbibliography
-\end{frame}
-
-
-
-\begin{comment}
-\frametitle{And why?}
-\begin{itemize}
-\item Simplification
-\item Facilitate other research
-\end{itemize}
-\end{frame}
-%------------------------------------------------
-\begin{frame}
-\frametitle{Engineering Areas of Interest}
 \end{comment}
 \end{document}
