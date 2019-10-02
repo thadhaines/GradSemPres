@@ -11,6 +11,7 @@
 \usepackage{listings}
 
 \usepackage{hyperref}
+\usepackage{multicol}
 
 % For figure usage and linking
 \usepackage{graphicx}
@@ -153,46 +154,66 @@ Electrical supply connected to demand.\\
 \section{Long-Term Dynamics}
 %________________________________________________
 \subsection{Explanation of Wording}
-\begin{frame}
-\frametitle{What is Long-Term?}
-% Insert timeScales Graph Here
-Long-term describes the amount of time required for events of interest to occur and the simulation length to be executed. \\
-\vspace{1em}
-In this case: 10 to 60 minutes
-\end{frame}
-
 %------------------------------------------------
 \begin{frame}
 \frametitle{What is Dynamic Simulation?}
 A computer's mathematical estimation of how a system will change over time.\\% in response to certain inputs and known starting conditions.\\ % Simulation of system changing over time
 \vspace{1em}
+Think solving ODE's.\\
+\vspace{1em}
 How certain qualities of a power system may change over time in response to a known perturbance.
 \end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{What is Long-Term?}\ \vspace{-1em}
+% Insert timeScales Graph Here
+\begin{multicols}{2}
+\centering{
+{\includegraphics[height=.8\textheight]{timeScales}} % from p3. chow sauer pai , Power System Dynamics and Stability book
+}\cite{SauerPaiChow}  \\
+%Long-term describes the amount of time required for events of interest to occur and the simulation length to be executed. \\
+%In this case: 10 to 60 minutes
+\begin{itemize}
+\item 1 sec time step
+\item 10-60 minute simulations
+\end{itemize}
+\end{multicols}
+
+\end{frame}
+
 %------------------------------------------------
 \subsection{Key Dynamic Concepts of Interest}
 %------------------------------------------------
 \begin{frame}
+\frametitle{Generators}
 Frequency, Accelerating power and Inertia.\\
 \[ \dot{\omega}_{sys} = \dfrac{1}{2H_{sys} } \left( \dfrac{P_{acc, sys} }{\omega_{sys}(t)} - D_{sys}\Delta\omega_{sys}(t)  \right)\]
 Direct link - electric demand always met. If there isn't enough generation, the kinetic energy stored as a moving inertia in a generator is converted to electric energy and the generator slows down.
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-Governors Defined:\\
-Turbine speed governors adjust a machines mechanical power to stop frequency decline. Input is frequency deviation and current operating set point. Primary control.
+\frametitle{Turbine Speed Governors}
+(Governors)
+Turbine speed governors adjust a machines mechanical power to stop frequency decline. Input is frequency deviation and current operating set point. Classified Primary control.
+% model of tgov1?
+\centering{\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/models/tgov1/tgov1}}
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-Automatic Governor Control Defined\\
-(AKA Load Frequency Control)
-\\
-Adjusts generator nominal operating set point to remove any inadvertent interchange and restore system frequency to 60 Hz. Secondary Control.
+\frametitle{Automatic Generation Control}
+%(AGC), also knows as Load Frequency Control or LFC)
+%\\
+%Adjusts generator nominal operating set point to remove any inadvertent interchange and restore system frequency to 60 Hz. Classified Secondary Control.
+% kundur pic... p378 firug 9.1
+\centering{\includegraphics[height=.8\textheight]{AGCblockdiagram}}
+\cite{kundur}
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-Multi Area Interactions \\
+\frametitle{Multi-Area Interactions}
 
 Areas import or export power to each other.
+% reuse one of those chart pictures
 \end{frame}
 %************************************************
 \section{Time-Sequenced Power Flows}
