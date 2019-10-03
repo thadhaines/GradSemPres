@@ -68,24 +68,41 @@ Electrical supply connected to demand.\\
 %------------------------------------------------
 \begin{frame}
 \frametitle{U.S. Electric Generation}
-\centering{
+{\centering
 \includegraphics[height=.9\textheight]{july2019map} % from https://www.eia.gov/electricity/data/eia860m/
 }
 \end{frame}
 %------------------------------------------------
 \begin{frame}
 \frametitle{U.S. Electric Transmission Lines}
-\centering{
+{\centering
 \includegraphics[width=\linewidth]{UStransmission} %from https://www.eia.gov/state/maps.php?v=Electricity
 }
 \end{frame}
 %------------------------------------------------
 \begin{frame}
 \frametitle{Electric Transmission Lines}
-\centering{
+{\centering
 \includegraphics[height=.9\textheight]{xgridPlusSubs} % from Physical Security of the U.S. Power Grid.pdf
 
 }
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Interchanges}
+Interchanges are physical things - it makes sense to bring up here
+%{\centering
+%\includegraphics[height=.9\textheight]{xgridPlusSubs} % from Physical Security of the U.S. Power Grid.pdf
+%
+%}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{WECC}
+Current physical location, and it's what I'm simulating, good idea to bring up here.
+%{\centering
+%\includegraphics[height=.9\textheight]{xgridPlusSubs} % from Physical Security of the U.S. Power Grid.pdf
+%}
 \end{frame}
 %------------------------------------------------
 %________________________________________________
@@ -105,30 +122,30 @@ Electrical supply connected to demand.\\
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-\frametitle{Six NERC Regions}
-\centering{
+\frametitle{Six NERC Regions} % how much does this matter?
+{\centering
 \includegraphics[height=.8\textheight]{NERCregions} % from https://www.nerc.com/AboutNERC/keyplayers/Pages/default.aspx
 }
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-\frametitle{Main Interconnections}
-\centering{
+\frametitle{Main Interconnections} % this may be more of a rehash
+{\centering
 \includegraphics[height=.85\textheight]{NERCInterconnectionsEDIT} % edited from https://www.nerc.com/AboutNERC/keyplayers/Pages/default.aspx
 }
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-\frametitle{Balancing Authorities (BAs)}
-\centering{
+\frametitle{Balancing Authorities (BAs)}\ \vspace{.5em}
+{\centering
 \href{https://www.eia.gov/realtime_grid/}%
-{\includegraphics[width=\linewidth]{BAs}} % from https://www.eia.gov/realtime_grid/
+{\includegraphics[width=.95\linewidth]{BAs}} % from https://www.eia.gov/realtime_grid/
 }
 \end{frame}
 %------------------------------------------------
 \begin{frame}
 \frametitle{BA Action - Forcasting} \ \vspace{.5em}
-\centering{
+{\centering
 {\includegraphics[height=.4\textheight]{chart} 
 \includegraphics[height=.4\textheight]{chart1}} % https://www.eia.gov/realtime_grid/#/data/graphs?end=20190704T18&start=20190627T18&bas=000001&regions=0&errSeriesType=S
 }
@@ -136,7 +153,7 @@ Electrical supply connected to demand.\\
 %------------------------------------------------
 \begin{frame}
 \frametitle{BA Action - Import \& Export} \ \vspace{.5em}
-\centering{
+{\centering
 {\includegraphics[height=.4\textheight]{chart2} 
 \includegraphics[height=.4\textheight]{chart3}} % https://www.eia.gov/realtime_grid/#/data/graphs?end=20190704T18&start=20190627T18&bas=000001&regions=0&errSeriesType=S
 }
@@ -144,7 +161,7 @@ Electrical supply connected to demand.\\
 %------------------------------------------------
 \begin{frame}
 \frametitle{BA Action - Interchange Error} \ \vspace{.5em}
-\centering{
+{\centering
 {\includegraphics[height=.6\textheight]{chart4}} % https://www.eia.gov/realtime_grid/#/data/graphs?end=20190704T18&start=20190627T18&bas=000001&regions=0&errSeriesType=S
 }
 \end{frame}
@@ -167,17 +184,21 @@ How certain qualities of a power system may change over time in response to a kn
 \begin{frame}
 \frametitle{What is Long-Term?}\ \vspace{-1em}
 % Insert timeScales Graph Here
-\begin{multicols}{2}
-\centering{
-{\includegraphics[height=.8\textheight]{timeScales}} % from p3. chow sauer pai , Power System Dynamics and Stability book
-}\cite{SauerPaiChow}  \\
+\begin{minipage}{.7\linewidth}
+{\centering
+{\includegraphics[width=.8\linewidth]{timeScales}} % from p3. chow sauer pai , Power System Dynamics and Stability book
+}{\footnotesize\cite{SauerPaiChow}} 
+\end{minipage}% 
 %Long-term describes the amount of time required for events of interest to occur and the simulation length to be executed. \\
 %In this case: 10 to 60 minutes
+\begin{minipage}{.4\linewidth}
+\hspace{-1em}
 \begin{itemize}
 \item 1 sec time step
 \item 10-60 minute simulations
 \end{itemize}
-\end{multicols}
+\end{minipage}
+
 
 \end{frame}
 
@@ -192,11 +213,18 @@ Direct link - electric demand always met. If there isn't enough generation, the 
 \end{frame}
 %------------------------------------------------
 \begin{frame}
+\frametitle{Control Reaction Times}
+primary, secondary, tertiary
+
+picture...
+\end{frame}
+%------------------------------------------------
+\begin{frame}
 \frametitle{Turbine Speed Governors}
 (Governors)
 Turbine speed governors adjust a machines mechanical power to stop frequency decline. Input is frequency deviation and current operating set point. Classified Primary control.
 % model of tgov1?
-\centering{\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/models/tgov1/tgov1}}
+{\centering\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/models/tgov1/tgov1}}
 \end{frame}
 %------------------------------------------------
 \begin{frame}
@@ -205,8 +233,23 @@ Turbine speed governors adjust a machines mechanical power to stop frequency dec
 %\\
 %Adjusts generator nominal operating set point to remove any inadvertent interchange and restore system frequency to 60 Hz. Classified Secondary Control.
 % kundur pic... p378 firug 9.1
-\centering{\includegraphics[height=.8\textheight]{AGCblockdiagram}}
-\cite{kundur}
+{\centering\includegraphics[height=.8\textheight]{AGCblockdiagram}}
+{\footnotesize\cite{Kundur}}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Automatic Generation Control}
+%(AGC), also knows as Load Frequency Control or LFC)
+%\\
+Adjusts generator nominal operating set point to remove any inadvertent interchange and restore system frequency to 60 Hz. Classified Secondary Control.
+
+ACE Conventions Positive ACE denotes over generation. $B$ (the frequency bias) is negative.
+\begin{align*}
+\text{ACE}_{\text{tie line}} &= P_{\text{interchange}} - P_{\text{sched interchange}}\\
+\text{ACE}_{\text{frequency bias}} &= 10B(f_{\text{actual}}-f_{\text{sched}})f_{base}\\
+\text{ACE} &= \text{ACE}_{\text{tie line}} -\text{ACE}_{\text{frequency bias}}
+\end{align*}
+
 \end{frame}
 %------------------------------------------------
 \begin{frame}
@@ -244,7 +287,8 @@ Allows for additional dynamics to be calculated between \emph{snaps}.\\(i.e freq
 \frametitle{Transient vs Long-Term Simulation}
 Time scale.
 Level of detail required.
-Equations - transient used ODE to find next steady state, LTD used ODE to find next guess of input to power flow.
+Equations - transient simulation uses many ODEs to find next steady state and uses very small timesteps, 
+PSLTDSim uses ODE to find next guess of certain inputs to the power flow which then computes the next steady state - uses much large time steps.
 \end{frame}
 %************************************************
 \section{Recap}
@@ -273,7 +317,7 @@ To study engineering problems involving:
 		\item Automatic Generation Control Settings
 		\item Governor and AGC interaction
 	\end{itemize}
-	\item Ways to reduce Machine effort while meeting reliability standards.
+	\item Ways to reduce machine effort while meeting reliability standards.
 \end{itemize}
 \end{frame}
 %************************************************
@@ -295,9 +339,9 @@ BA controller action - do a with and without thing?
 \begin{frame}
 \frametitle{Current Conclusions}
 \begin{itemize}
-	\item Software (PSLTDSim) produces valid output for small to medium size systems.
-	\item Governor and AGC interactions can happen easily
-	\item Deadbands and conditional logic can be used to limit governor and AGC conflicts
+	\item Software (PSLTDSim) output appears valid for small to medium size systems.
+	\item Governor and AGC interactions can happen easily.
+	\item Advanced control can be used to limit governor and AGC conflicts as well as reduce overall machine effort.
 \end{itemize}
 \end{frame}
 %------------------------------------------------
@@ -305,14 +349,14 @@ BA controller action - do a with and without thing?
 \frametitle{Continuing Work}
 \begin{itemize}
 \item Experiments with AGC and turbine speed governor settings.
-\item Use of valve travel and system reliability as to measure validity of control regime.
+\item Use of valve travel and system reliability to gauge validity of control regime.
 \item Expansion of software capabilities to handle full WECC.
 \end{itemize}
 \end{frame}
 %------------------------------------------------
 
 \begin{frame}
-\centering{\Huge{Questions?}}
+{\centering\Huge{Questions?}}
 \end{frame}
 
 %-------------------------------------------------
