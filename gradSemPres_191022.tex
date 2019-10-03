@@ -68,14 +68,14 @@ Electrical supply connected to demand.\\
 %------------------------------------------------
 \begin{frame}
 \frametitle{U.S. Electric Generation}
-{\centering
-\includegraphics[height=.9\textheight]{july2019map} % from https://www.eia.gov/electricity/data/eia860m/
-}
+\begin{center}
+\includegraphics[height=.9\textheight]{july2019map} %{\footnotesize \cite{GishAGC}} % from https://www.eia.gov/electricity/data/eia860m/
+\end{center}
 \end{frame}
 %------------------------------------------------
 \begin{frame}
 \frametitle{U.S. Electric Transmission Lines}
-{\centering
+{\centering%
 \includegraphics[width=\linewidth]{UStransmission} %from https://www.eia.gov/state/maps.php?v=Electricity
 }
 \end{frame}
@@ -90,19 +90,45 @@ Electrical supply connected to demand.\\
 %------------------------------------------------
 \begin{frame}
 \frametitle{Interchanges}
-Interchanges are physical things - it makes sense to bring up here
-%{\centering
-%\includegraphics[height=.9\textheight]{xgridPlusSubs} % from Physical Security of the U.S. Power Grid.pdf
-%
-%}
+\begin{center}
+\includegraphics[height=.8\textheight]{InternconnectionBranded} % from http://www.ercot.com/news/mediakit/maps
+\end{center}
+
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{WECC Model}
+\begin{columns}
+\begin{column}{0.45\textwidth}
+   \begin{itemize}
+\item 21,879 Buses
+\item 17,210 lines
+\item 4,231 Gens
+\item 11,048 Loads
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\includegraphics[height=.8\textheight]{WECCauto} % from Montana electric transmission grid
+\end{column}
+\end{columns}
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-\frametitle{WECC}
-Current physical location, and it's what I'm simulating, good idea to bring up here.
-%{\centering
-%\includegraphics[height=.9\textheight]{xgridPlusSubs} % from Physical Security of the U.S. Power Grid.pdf
-%}
+\frametitle{miniWECC Model}
+\begin{columns}
+\begin{column}{0.45\textwidth}
+   \begin{itemize}
+\item 120 Buses
+\item 104 lines
+\item 34 Gens
+\item 23 Loads
+\end{itemize}
+\end{column}
+\begin{column}{.5\textwidth}
+\includegraphics[height=.8\textheight]{miniWECCpres} % from RJ paper...
+\end{column}
+\end{columns}
 \end{frame}
 %------------------------------------------------
 %________________________________________________
@@ -121,6 +147,7 @@ Current physical location, and it's what I'm simulating, good idea to bring up h
 \end{itemize}
 \end{frame}
 %------------------------------------------------
+\begin{comment}
 \begin{frame}
 \frametitle{Six NERC Regions} % how much does this matter?
 {\centering
@@ -134,6 +161,7 @@ Current physical location, and it's what I'm simulating, good idea to bring up h
 \includegraphics[height=.85\textheight]{NERCInterconnectionsEDIT} % edited from https://www.nerc.com/AboutNERC/keyplayers/Pages/default.aspx
 }
 \end{frame}
+\end{comment}
 %------------------------------------------------
 \begin{frame}
 \frametitle{Balancing Authorities (BAs)}\ \vspace{.5em}
@@ -173,6 +201,25 @@ Current physical location, and it's what I'm simulating, good idea to bring up h
 \subsection{Explanation of Wording}
 %------------------------------------------------
 \begin{frame}
+\frametitle{What is Long-Term?}
+%Long-term describes the amount of time required for events of interest to occur and the simulation length to be executed.
+\begin{columns}
+\begin{column}{0.4\textwidth}
+   \begin{itemize}
+\small
+\item 1 sec time step
+\item 10-60 minute simulations
+\end{itemize}
+\end{column}
+\begin{column}{0.7\textwidth}
+    \begin{center}
+     \includegraphics[height=.8\textheight]{timeScales}{\footnotesize\cite{SauerPaiChow}} 
+     \end{center}
+\end{column}
+\end{columns}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
 \frametitle{What is Dynamic Simulation?}
 A computer's mathematical estimation of how a system will change over time.\\% in response to certain inputs and known starting conditions.\\ % Simulation of system changing over time
 \vspace{1em}
@@ -181,48 +228,34 @@ Think solving ODE's.\\
 How certain qualities of a power system may change over time in response to a known perturbance.
 \end{frame}
 %------------------------------------------------
-\begin{frame}
-\frametitle{What is Long-Term?}\ \vspace{-1em}
-% Insert timeScales Graph Here
-\begin{minipage}{.7\linewidth}
-{\centering
-{\includegraphics[width=.8\linewidth]{timeScales}} % from p3. chow sauer pai , Power System Dynamics and Stability book
-}{\footnotesize\cite{SauerPaiChow}} 
-\end{minipage}% 
-%Long-term describes the amount of time required for events of interest to occur and the simulation length to be executed. \\
-%In this case: 10 to 60 minutes
-\begin{minipage}{.4\linewidth}
-\hspace{-1em}
-\begin{itemize}
-\item 1 sec time step
-\item 10-60 minute simulations
-\end{itemize}
-\end{minipage}
-
-
-\end{frame}
-
-%------------------------------------------------
-\subsection{Key Dynamic Concepts of Interest}
+\subsection{Dynamic Concepts of Interest}
 %------------------------------------------------
 \begin{frame}
-\frametitle{Generators}
-Frequency, Accelerating power and Inertia.\\
-\[ \dot{\omega}_{sys} = \dfrac{1}{2H_{sys} } \left( \dfrac{P_{acc, sys} }{\omega_{sys}(t)} - D_{sys}\Delta\omega_{sys}(t)  \right)\]
-Direct link - electric demand always met. If there isn't enough generation, the kinetic energy stored as a moving inertia in a generator is converted to electric energy and the generator slows down.
+\frametitle{Frequency ($\omega$)}
+%Direct link - electric demand always met. If there isn't enough generation, the kinetic energy stored as a moving inertia in a generator is converted to electric energy and the generator slows down.
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\[ \dot{\omega}_{sys} = \dfrac{P_{acc, sys}}{2H_{sys}\omega_{sys}(t) } \]
+Electric demand always met.
+\end{column}
+\begin{column}{0.7\textwidth}
+    \begin{center}
+     \includegraphics[width=\linewidth]{freqScale} %  from comm-OC-RS_Related_Resources-nerc balancing and frequency control 040520111.pdf
+     \end{center}
+\end{column}
+\end{columns}
 \end{frame}
 %------------------------------------------------
 \begin{frame}
 \frametitle{Control Reaction Times}
-primary, secondary, tertiary
-
-picture...
+\begin{center}
+\includegraphics[height=.85\textheight]{ctrlReaction} % modified from Generator Governor and Information Settings Webinar NERC
+\end{center}
 \end{frame}
 %------------------------------------------------
 \begin{frame}
 \frametitle{Turbine Speed Governors}
-(Governors)
-Turbine speed governors adjust a machines mechanical power to stop frequency decline. Input is frequency deviation and current operating set point. Classified Primary control.
+Governors adjust a machines mechanical power to arrest frequency decline. Classified Primary control.
 % model of tgov1?
 {\centering\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/models/tgov1/tgov1}}
 \end{frame}
