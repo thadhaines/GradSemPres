@@ -1,17 +1,15 @@
 \documentclass[14pt, unknownkeysallowed]{beamer}
 
-\usepackage{tikz}
 \usepackage{comment}
 \usepackage{fancyvrb}
-\usepackage{tikz}
-\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri}
-\usepackage{circuitikz} % for circuits!
-\usetikzlibrary{arrows.meta} % for loads
+%\usepackage{tikz}
+%\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri}
+%\usepackage{circuitikz} % for circuits!
+%\usetikzlibrary{arrows.meta} % for loads
 \usepackage{float}
 \usepackage{listings}
 
 \usepackage{hyperref}
-\usepackage{multicol}
 
 % For figure usage and linking
 \usepackage{graphicx}
@@ -113,24 +111,7 @@ Electrical supply connected to demand.\\
 \end{column}
 \end{columns}
 \end{frame}
-%------------------------------------------------
-\begin{frame}
-\frametitle{miniWECC Model}
-\begin{columns}
-\begin{column}{0.45\textwidth}
-   \begin{itemize}
-\item 120 Buses
-\item 104 lines
-\item 34 Gens
-\item 23 Loads
-\end{itemize}
-\end{column}
-\begin{column}{.5\textwidth}
-\includegraphics[height=.8\textheight]{miniWECCpres} % from RJ paper...
-\end{column}
-\end{columns}
-\end{frame}
-%------------------------------------------------
+
 %________________________________________________
 \subsection{Operational Structure}
 %------------------------------------------------
@@ -142,7 +123,7 @@ Electrical supply connected to demand.\\
 \item \textbf{NERC}{ \footnotesize
  North American Electric Reliability Corp.}\\
  Aurthority granted by FERC
- \item \textbf{Balancing Authorities} (BAs) \\
+ \item \textbf{Balancing Authority} (BA) \\
  Manage specific portions of the power system to balance supply and demand and maintain mandatory operating conditions set by FERC and NERC. % abstracted from: https://www.eia.gov/todayinenergy/detail.php?id=27152
 \end{itemize}
 \end{frame}
@@ -164,7 +145,7 @@ Electrical supply connected to demand.\\
 \end{comment}
 %------------------------------------------------
 \begin{frame}
-\frametitle{Balancing Authorities}\ \vspace{.5em}
+\frametitle{Balancing Authorities (BAs)}\ \vspace{.5em}
 % Roughtly 60, circles indicitive of size
 {\centering
 \href{https://www.eia.gov/realtime_grid/}%
@@ -356,15 +337,90 @@ To study engineering problems involving:
 \end{frame}
 %************************************************
 \section{Quick Results}
+%________________________________________________
+\subsection{Quick Validation}
 %------------------------------------------------
 \begin{frame}
-\frametitle{Quick Initial Validation}
-pictures of step event comparisons of ltd vs psds
+\frametitle{miniWECC Model}
+\begin{columns}
+	\begin{column}{0.45\textwidth}
+		\begin{itemize}
+			\item 120 Buses
+			\item 104 lines
+			\item 34 Gens
+			\item 23 Loads
+		\end{itemize}
+	\end{column}
+	\begin{column}{.5\textwidth}
+		\includegraphics[height=.8\textheight]{miniWECCpres} % from RJ paper...
+	\end{column}
+\end{columns}
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-\frametitle{Quick Controller Test}
-BA controller action - do a with and without thing?
+\frametitle{Step Perturbance Validation}
+\framesubtitle{400 MW Load Step Frequency Comparison}
+\begin{columns}
+	\begin{column}{.5\linewidth}
+		\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/one-offs/final-validation-01/figures/miniWECC3ALTDstepF3}
+	\end{column}
+	\begin{column}{.5\linewidth}
+		\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/one-offs/final-validation-01/figures/miniWECC3ALTDstepRelF}
+	\end{column}
+\end{columns}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Step Perturbance Validation}
+\framesubtitle{400 MW Load Step Mechanical Power Comparison}
+\begin{columns}
+	\begin{column}{.5\linewidth}
+		\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/one-offs/final-validation-01/figures/miniWECC3ALTDstepPm2}
+	\end{column}
+	\begin{column}{.5\linewidth}
+		\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/one-offs/final-validation-01/figures/miniWECC3ALTDstepPm3}
+	\end{column}
+\end{columns}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Ramp Perturbance Validation}
+\framesubtitle{20 second 400 MW Load Ramp Frequency Comparison}
+\begin{columns}
+	\begin{column}{.5\linewidth}
+		\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/one-offs/final-validation-01/figures/miniWECC3ALTDrampF3}
+	\end{column}
+	\begin{column}{.5\linewidth}
+		\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/one-offs/final-validation-01/figures/miniWECC3ALTDrampRelF}
+	\end{column}
+\end{columns}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Ramp Perturbance Validation}
+\framesubtitle{20 second 400 MW Load ramp Mechanical Power Comparison}
+\begin{columns}
+\begin{column}{.5\linewidth}
+	\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/one-offs/final-validation-01/figures/miniWECC3ALTDrampPm2}
+\end{column}
+\begin{column}{.5\linewidth}
+	\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/one-offs/final-validation-01/figures/miniWECC3ALTDrampPm3}
+\end{column}
+\end{columns}
+\end{frame}
+%------------------------------------------------
+\subsection{Quick Controller Test}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Governor Deadband Options}
+Pic of deadband options
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Governor Deadband Results}
+BA gov deadband action - do a step deadband, and ramp deadband f comparison
+
+should see 'knocking' with step, assumed to be resolved with ramp...
 \end{frame}
 %------------------------------------------------
 %************************************************
