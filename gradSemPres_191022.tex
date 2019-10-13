@@ -8,6 +8,7 @@
 %\usetikzlibrary{arrows.meta} % for loads
 \usepackage{float}
 \usepackage{listings}
+\usepackage{commath} % for abs
 
 \usepackage{hyperref}
 
@@ -96,14 +97,15 @@ Electrical supply connected to demand.\\
 
 %------------------------------------------------
 \begin{frame}
-\frametitle{WECC Model}
+\frametitle{Industry Software Model}
+\framesubtitle{WECC Model}
 \begin{columns}
 \begin{column}{0.45\textwidth}
    \begin{itemize}
-\item 21,879 Buses
-\item 17,210 lines
-\item 4,231 Gens
-\item 11,048 Loads
+   	\item 4,231 Generators
+   	\item 17,210 Lines
+   	\item 11,048 Loads
+	\item 21,879 Buses
 \end{itemize}
 \end{column}
 \begin{column}{0.5\textwidth}
@@ -188,20 +190,21 @@ $\approx$ Area Control Error
 \frametitle{What is Long-Term?}
 %Long-term describes the amount of time required for events of interest to occur and the simulation length to be executed.
 \begin{columns}
-\begin{column}{0.4\textwidth}
-   \begin{itemize}
-\small
-\item 1 sec $\leftrightarrow$ hours \\
-$\therefore$ 
-\item 10$\rightarrow$60 minute simulations
-\item 1 sec time step
-\end{itemize}
-\end{column}
-\begin{column}{0.7\textwidth}
-    \begin{center}
-     \includegraphics[height=.8\textheight]{timeScales}{\footnotesize\cite{SauerPaiChow}} 
-     \end{center}
-\end{column}
+	\begin{column}{0.7\textwidth}
+		\begin{center}
+			\includegraphics[height=.8\textheight]{timeScalesHL}{\footnotesize\cite{SauerPaiChow}} 
+		\end{center}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+	   \begin{itemize}
+			\small
+			\item 1 sec $\leftrightarrow$ hours \\
+			$\therefore$ 
+			\item 10$\rightarrow$60 minute simulations
+			\item 1 sec time step
+	\end{itemize}
+	\end{column}
+
 \end{columns}
 \end{frame}
 %------------------------------------------------
@@ -219,20 +222,30 @@ How certain qualities of a power system may change over time in response to a kn
 \begin{frame}
 \frametitle{Frequency ($\omega$)}
 %Direct link - electric demand always met. If there isn't enough generation, the kinetic energy stored as a moving inertia in a generator is converted to electric energy and the generator slows down.
-\begin{columns}
-\begin{column}{0.4\textwidth}
+\begin{minipage}[t][.55\textheight][t]{\textwidth}
+%\begin{columns}
+%\begin{column}{0.4\textwidth}
+	\begin{minipage}{.4\linewidth}
+\vspace{-2em}
 \[ \dot{\omega}_{sys} = \dfrac{P_{acc, sys}}{2H_{sys}\omega_{sys}(t) } \]
 \[ P_{acc} = P_{gen} - P_{load} \]
-Electric demand always met.\\
-\vspace{1em}
-Demand always changing.
-\end{column}
-\begin{column}{0.7\textwidth}
+	
+\end{minipage}%
+%\end{column}
+%\begin{column}{0.6\textwidth}
+\begin{minipage}{.6\linewidth}
+\vspace{-2em}
     \begin{center}
      \includegraphics[width=\linewidth]{freqScale} %  from comm-OC-RS_Related_Resources-nerc balancing and frequency control 040520111.pdf
      \end{center}
-\end{column}
-\end{columns}
+ 
+\end{minipage}
+%\end{column}
+%\end{columns}
+\end{minipage}
+Electric load always met.\\
+\vspace{.5 em}
+Load and losses always changing.
 \end{frame}
 %------------------------------------------------
 \begin{frame}
@@ -244,19 +257,24 @@ Demand always changing.
 %------------------------------------------------
 \begin{frame}
 \frametitle{Turbine Speed Governors}
-Primary control.
+\framesubtitle{Primary Control}
 
-Governors adjust turbine mechanical power to arrest frequency decline. 
+Purpose: Adjust turbine mechanical power to arrest frequency decline.\\
+\vspace{.5em}
+
+Dynamic Variable: Fuel Valve Position 
 % model of tgov1?
 {\centering\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/models/tgov1/tgov1}}
-Dynamic Variable: Fuel Valve Position
+
 \end{frame}
 %------------------------------------------------
 \begin{frame}
 \frametitle{Automatic Generation Control}
-Secondary Control.
+\framesubtitle{Secondary Control}
 
-Correct frequency and interchange error.
+Purpose: Eliminate Area Control Error\\
+\vspace{.5em}
+Dynamic Variable: Area Control Error
 %(AGC), also knows as Load Frequency Control or LFC)
 %\\
 %Adjusts generator nominal operating set point to remove any inadvertent interchange and restore system frequency to 60 Hz. Classified Secondary Control.
@@ -265,7 +283,6 @@ Correct frequency and interchange error.
 \includegraphics[height=.55\textheight]{AGCblockdiagram}
 {\footnotesize\cite{Kundur}}
 \end{center}
-Dynamic Variable: Area Control Error
 \end{frame}
 %------------------------------------------------
 
@@ -277,21 +294,37 @@ Dynamic Variable: Area Control Error
 %------------------------------------------------
 \begin{frame}
 \frametitle{What is a Power Flow?}
-A steady state solution to all bus voltages, bus voltage angles, and real  and reactive power of a system.\\
-% A sonlution to a system of non-linear equations solved by iteration.
-\vspace{1em}
-A \emph{snapshot} of a stable power system. \\% not dynamic
-\vspace{1em}
-Power flows are not dynamic.
+%\begin{columns}
+%	\begin{column}{.5\linewidth}
+		A steady state power system solution.\\% to all bus voltages, bus voltage angles, and real  and reactive power of a system.\\
+		% A sonlution to a system of non-linear equations solved by iteration.
+		%\vspace{1em}
+		A \emph{snapshot} of a stable power system. \\% not dynamic
+		
+%	\end{column}
+%	\begin{column}{.5\linewidth}
+
+\begin{center}
+	\includegraphics[width=.6\linewidth]{powerFlowSingle} 
+\end{center}
+
+	
+		Power flows are not dynamic.
+%	\end{column}
+%\end{columns}
+
 \end{frame}
 %------------------------------------------------
 \begin{frame}
 \frametitle{Time-Sequenced Power Flows?}
-Multiple power flows arranged in a way to give the allusion of time.\\
-\vspace{1em}
-A \emph{flip book} of \emph{snapshots}.\\
-\vspace{1em}
-Allows for additional dynamics to be calculated between \emph{snaps}.\\(i.e frequency, valve position, etc. )\\
+Power flows arranged in sequence to give the illusion of time.\\
+%\vspace{1em}
+%A \emph{flip book} of \emph{snapshots}.\\
+\begin{center}
+	\includegraphics[width=.8\linewidth]{powerFlowSequence}
+\end{center}
+%\vspace{1em}
+%Dynamics calculated between power flows.%\\(i.e frequency, valve position, etc. )\\
 \end{frame}
 %________________________________________________
 \subsection{Rational for Computational Approach}
@@ -341,14 +374,15 @@ To study engineering problems involving:
 \subsection{Quick Validation}
 %------------------------------------------------
 \begin{frame}
-\frametitle{miniWECC Model}
+\frametitle{Software Model}
+\framesubtitle{miniWECC}
 \begin{columns}
 	\begin{column}{0.45\textwidth}
 		\begin{itemize}
-			\item 120 Buses
-			\item 104 lines
-			\item 34 Gens
+			\item 34 Generators
+			\item 104 Lines
 			\item 23 Loads
+			\item 120 Buses
 		\end{itemize}
 	\end{column}
 	\begin{column}{.5\textwidth}
@@ -357,6 +391,19 @@ To study engineering problems involving:
 \end{columns}
 \end{frame}
 %------------------------------------------------
+\begin{frame}
+\frametitle{Plot Explanation}\ \\
+\vspace{.25em}
+		\includegraphics[width=\linewidth]{comparisonsEx} 
+		{\footnotesize
+		\[\text{PSDS}_{data}-\text{LTD}_{data} = \text{Deviation}_{data}\]
+		%Percent difference
+		\[\%_{diff} = \dfrac{\abs{x-y}}{\frac{x+y}{2}}*100\% \]}
+\end{frame}
+%------------------------------------------------
+
+
+
 \begin{frame}
 \frametitle{Step Perturbance Validation}
 \framesubtitle{400 MW Load Step Frequency Comparison}
@@ -412,15 +459,10 @@ To study engineering problems involving:
 \subsection{Quick Controller Test}
 %------------------------------------------------
 \begin{frame}
-\frametitle{Governor Deadband Options}
-Pic of deadband options
-\end{frame}
-%------------------------------------------------
-\begin{frame}
-\frametitle{Governor Deadband Results}
-BA gov deadband action - do a step deadband, and ramp deadband f comparison
-
-should see 'knocking' with step, assumed to be resolved with ramp...
+\frametitle{Area Droop and Valve Travel}
+Compare Step from Area with low and high droop, how other areas react.
+side by side graph
+table with percent diff
 \end{frame}
 %------------------------------------------------
 %************************************************
