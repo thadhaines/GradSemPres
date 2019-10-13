@@ -104,6 +104,7 @@ Electrical supply connected to demand.\\
    \begin{itemize}
    	\item 4,231 Generators
    	\item 17,210 Lines
+ 	\item 22 Areas
    	\item 11,048 Loads
 	\item 21,879 Buses
 \end{itemize}
@@ -381,6 +382,7 @@ To study engineering problems involving:
 		\begin{itemize}
 			\item 34 Generators
 			\item 104 Lines
+			\item 3 Areas
 			\item 23 Loads
 			\item 120 Buses
 		\end{itemize}
@@ -460,9 +462,30 @@ To study engineering problems involving:
 %------------------------------------------------
 \begin{frame}
 \frametitle{Area Droop and Valve Travel}
-Compare Step from Area with low and high droop, how other areas react.
-side by side graph
-table with percent diff
+\begin{columns}
+\begin{column}{.5\linewidth}
+{\tiny Area 3 droop = 0.2}
+	\includegraphics[width=\linewidth]{genTripHighRnoDBValveTravel01}
+\end{column}
+\begin{column}{.5\linewidth}
+{\tiny Area 3 droop = 0.05}
+	\includegraphics[width=\linewidth]{genTripEqualRnoDBValveTravel01}
+\end{column}
+\end{columns}
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Deadband and Valve Travel}
+\begin{columns}
+\begin{column}{.5\linewidth}
+{\tiny Step Deadband}
+	\includegraphics[width=\linewidth]{genTripEqualRstepDBValveTravel01}
+\end{column}
+\begin{column}{.5\linewidth}
+{\tiny Non-Linear Droop Deadband}
+	\includegraphics[width=\linewidth]{genTripEqualRnonLinDBValveTravel01}
+\end{column}
+\end{columns}
 \end{frame}
 %------------------------------------------------
 %************************************************
@@ -472,15 +495,17 @@ table with percent diff
 \frametitle{Current Conclusions}
 \begin{itemize}
 	\item Software (PSLTDSim) output appears valid for tested systems.
-	\item Governor and AGC interactions can happen easily.
-	\item Advanced control can be used to limit governor and AGC conflicts as well as reduce overall machine effort.
+	\item Governor droop in one area affects how other areas respond.
+	\item Step deadband may increase valve travel.
+	%\item Governor and AGC interactions can happen easily.
+	%\item Advanced control can be used to limit governor and AGC conflicts as well as reduce overall machine effort.
 \end{itemize}
 \end{frame}
 %------------------------------------------------
 \begin{frame}
 \frametitle{Continuing Work}
 \begin{itemize}
-\item Experiments with AGC and turbine speed governor settings.
+\item Experiments with AGC and governor settings.
 \item Use of valve travel and system reliability to gauge validity of control regime.
 \item Expansion of software capabilities to handle full WECC.
 \end{itemize}
