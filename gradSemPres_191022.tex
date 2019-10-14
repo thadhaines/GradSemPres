@@ -55,7 +55,8 @@ sorting=nyt % sorts by author, year, title
 %------------------------------------------------
 \begin{frame}
 \frametitle{What is a Power System?}
-\includegraphics[width=\linewidth]{largeGrid} % image  fromhttps://www.ferc.gov/industries/electric/indus-act/reliability/blackout/ch1-3.pdf
+\includegraphics[width=\linewidth]{largeGrid}{\tiny \cite{powersystemSVG} } % image  from https://www.ferc.gov/industries/electric/indus-act/reliability/blackout/ch1-3.pdf
+% and https://commons.wikimedia.org/wiki/File:Electricity_grid_simple-_North_America.svg
 % 3 Area MiniWECC picture?
 Electrical supply connected to demand.\\
 %\vspace{1em}
@@ -68,21 +69,21 @@ Electrical supply connected to demand.\\
 \begin{frame}
 \frametitle{U.S. Electric Generation}
 \begin{center}
-\includegraphics[height=.9\textheight]{july2019map} %{\footnotesize \cite{GishAGC}} % from https://www.eia.gov/electricity/data/eia860m/
+\includegraphics[height=.82\textheight]{july2019map} {\tiny \cite{USgenerationMAP} } % from https://www.eia.gov/electricity/data/eia860m/
 \end{center}
 \end{frame}
 %------------------------------------------------
 \begin{frame}
 \frametitle{U.S. Electric Transmission Lines}
 {\centering%
-\includegraphics[width=\linewidth]{UStransmission} %from https://www.eia.gov/state/maps.php?v=Electricity
+\includegraphics[width=\linewidth]{UStransmission} {\tiny \cite{UStransmissionMAP} } %from https://www.eia.gov/state/maps.php?v=Electricity
 }
 \end{frame}
 %------------------------------------------------
 \begin{frame}
 \frametitle{Electric Transmission Lines}
 {\centering
-\includegraphics[height=.9\textheight]{xgridPlusSubs} % from Physical Security of the U.S. Power Grid.pdf
+\includegraphics[height=.82\textheight]{xgridPlusSubs} {\tiny \cite{NAtransmissionMAP} }% from Physical Security of the U.S. Power Grid.pdf
 
 }
 \end{frame}
@@ -90,7 +91,7 @@ Electrical supply connected to demand.\\
 \begin{frame}
 \frametitle{Interconnections}
 \begin{center}
-\includegraphics[height=.8\textheight]{InternconnectionBranded} % from http://www.ercot.com/news/mediakit/maps
+\includegraphics[height=.8\textheight]{InternconnectionBranded}  {\tiny \cite{ercotInterconnections} }% from http://www.ercot.com/news/mediakit/maps
 \end{center}
 
 \end{frame}
@@ -110,7 +111,8 @@ Electrical supply connected to demand.\\
 \end{itemize}
 \end{column}
 \begin{column}{0.5\textwidth}
-\includegraphics[height=.8\textheight]{WECCauto} % from Montana electric transmission grid
+{\tiny \cite{MTlegReport} }
+\includegraphics[height=.8\textheight]{WECCauto}  % from Montana electric transmission grid
 \end{column}
 \end{columns}
 \end{frame}
@@ -150,16 +152,19 @@ Electrical supply connected to demand.\\
 \begin{frame}
 \frametitle{Balancing Authorities (BAs)}\ \vspace{.5em}
 % Roughtly 60, circles indicitive of size
-{\centering
+\begin{center}
+\vspace{-1.5em}
 \href{https://www.eia.gov/realtime_grid/}%
 {\includegraphics[width=.95\linewidth]{BAs}} % from https://www.eia.gov/realtime_grid/
-}
+\end{center}
+\vspace{-1em}
+{\tiny \cite{BAinformation} }
 \end{frame}
 %------------------------------------------------
 \begin{frame}
 \frametitle{BA Action - Forcasting} %\ \vspace{.5em}
 \begin{center}
-\includegraphics[height=.85\textheight]{BAforcast} % https://www.eia.gov/realtime_grid/#/data/graphs?end=20190704T18&start=20190627T18&bas=000001&regions=0&errSeriesType=S
+\includegraphics[height=.82\textheight]{BAforcast} {\tiny \cite{BAinformation} }% https://www.eia.gov/realtime_grid/#/data/graphs?end=20190704T18&start=20190627T18&bas=000001&regions=0&errSeriesType=S
 \end{center}
 
 \end{frame}
@@ -167,7 +172,7 @@ Electrical supply connected to demand.\\
 \begin{frame}
 \frametitle{BA Action - Interchange} %\ \vspace{.5em}
 \begin{center}
-\includegraphics[height=.85\textheight]{BAinterchange} % https://www.eia.gov/realtime_grid/#/data/graphs?end=20190704T18&start=20190627T18&bas=000001&regions=0&errSeriesType=S
+\includegraphics[height=.82\textheight]{BAinterchange} {\tiny \cite{BAinformation} }% https://www.eia.gov/realtime_grid/#/data/graphs?end=20190704T18&start=20190627T18&bas=000001&regions=0&errSeriesType=S
 \end{center}
 
 \end{frame}
@@ -176,7 +181,7 @@ Electrical supply connected to demand.\\
 \frametitle{BA Action - Interchange Error} \ \vspace{.5em}
 $\approx$ Area Control Error
 {\centering
-{\includegraphics[height=.6\textheight]{chart4}} % https://www.eia.gov/realtime_grid/#/data/graphs?end=20190704T18&start=20190627T18&bas=000001&regions=0&errSeriesType=S
+{\includegraphics[height=.6\textheight]{chart4}} {\tiny \cite{BAinformation} }% https://www.eia.gov/realtime_grid/#/data/graphs?end=20190704T18&start=20190627T18&bas=000001&regions=0&errSeriesType=S
 }
 
 \end{frame}
@@ -193,7 +198,7 @@ $\approx$ Area Control Error
 \begin{columns}
 	\begin{column}{0.7\textwidth}
 		\begin{center}
-			\includegraphics[height=.8\textheight]{timeScalesHL}{\footnotesize\cite{SauerPaiChow}} 
+			\includegraphics[height=.8\textheight]{timeScalesHL}{\tiny\cite{SauerPaiChow}} 
 		\end{center}
 	\end{column}
 	\begin{column}{0.5\textwidth}
@@ -237,9 +242,8 @@ How certain qualities of a power system may change over time in response to a kn
 \begin{minipage}{.6\linewidth}
 \vspace{-2em}
     \begin{center}
-     \includegraphics[width=\linewidth]{freqScale} %  from comm-OC-RS_Related_Resources-nerc balancing and frequency control 040520111.pdf
+     \includegraphics[width=\linewidth]{freqScale}   {\tiny\cite{freqScale}}%  from comm-OC-RS_Related_Resources-nerc balancing and frequency control 040520111.pdf
      \end{center}
- 
 \end{minipage}
 %\end{column}
 %\end{columns}
@@ -252,7 +256,7 @@ Load and losses always changing.
 \begin{frame}
 \frametitle{Automatic Controls}
 \begin{center}
-\includegraphics[height=.85\textheight]{ctrlReactionFlip} % modified from Generator Governor and Information Settings Webinar NERC
+\includegraphics[height=.82\textheight]{ctrlReactionFlip} {\tiny\cite{ctrlTimeScale}}% modified from Generator Governor and Information Settings Webinar NERC
 \end{center}
 \end{frame}
 %------------------------------------------------
@@ -282,7 +286,7 @@ Dynamic Variable: Area Control Error
 % kundur pic... p378 firug 9.1
 \begin{center}
 \includegraphics[height=.55\textheight]{AGCblockdiagram}
-{\footnotesize\cite{Kundur}}
+{\tiny\cite{Kundur}}
 \end{center}
 \end{frame}
 %------------------------------------------------
@@ -388,7 +392,8 @@ To study engineering problems involving:
 		\end{itemize}
 	\end{column}
 	\begin{column}{.5\textwidth}
-		\includegraphics[height=.8\textheight]{miniWECCpres} % from RJ paper...
+		\includegraphics[height=.8\textheight]{miniWECCpres} 
+		{\tiny\cite{RJminiWECC}}% from RJ paper...
 	\end{column}
 \end{columns}
 \end{frame}
