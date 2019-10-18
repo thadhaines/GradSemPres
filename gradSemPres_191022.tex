@@ -58,7 +58,8 @@ sorting=nyt % sorts by author, year, title
 \includegraphics[width=\linewidth]{largeGrid}{\tiny \cite{powersystemSVG} } % image  from https://www.ferc.gov/industries/electric/indus-act/reliability/blackout/ch1-3.pdf
 % and https://commons.wikimedia.org/wiki/File:Electricity_grid_simple-_North_America.svg
 % 3 Area MiniWECC picture?
-Electrical supply connected to demand.\\
+Electrical supply connected to demand.\\ \vspace{.25em}
+Research focus on transmission system.
 %\vspace{1em}
 %Power plants connected via transmission lines to cities in different areas. \\
 %\vspace{1em}
@@ -99,7 +100,7 @@ Electrical supply connected to demand.\\
 %------------------------------------------------
 \begin{frame}
 \frametitle{Industry Software Model}
-\framesubtitle{WECC Model}
+\framesubtitle{WECC Model (GE PSLF)}
 \begin{columns}
 \begin{column}{0.45\textwidth}
    \begin{itemize}
@@ -193,6 +194,15 @@ $\approx$ Area Control Error
 \subsection{Explanation of Wording}
 %------------------------------------------------
 \begin{frame}
+\frametitle{What is Dynamic Simulation?}
+A computer's mathematical solution to how a system may change over time.\\% in response to certain inputs and known starting conditions.\\ % Simulation of system changing over time
+\vspace{1em}
+Think solving ODE's.\\
+\vspace{1em}
+How certain qualities of a power system may change over time in response to known disturbances.
+\end{frame}
+%------------------------------------------------
+\begin{frame}
 \frametitle{What is Long-Term?}
 %Long-term describes the amount of time required for events of interest to occur and the simulation length to be executed.
 \begin{columns}
@@ -213,15 +223,7 @@ $\approx$ Area Control Error
 
 \end{columns}
 \end{frame}
-%------------------------------------------------
-\begin{frame}
-\frametitle{What is Dynamic Simulation?}
-A computer's mathematical solution to how a system may change over time.\\% in response to certain inputs and known starting conditions.\\ % Simulation of system changing over time
-\vspace{1em}
-Think solving ODE's.\\
-\vspace{1em}
-How certain qualities of a power system may change over time in response to a known perturbance.
-\end{frame}
+
 %------------------------------------------------
 \subsection{Dynamic Concepts of Interest}
 %------------------------------------------------
@@ -279,12 +281,14 @@ Dynamic Variable: Fuel Valve Position
 
 Purpose: Eliminate Area Control Error\\
 \vspace{.5em}
-Dynamic Variable: Area Control Error
+Dynamic Variable: Area Control Error \\
 %(AGC), also knows as Load Frequency Control or LFC)
 %\\
 %Adjusts generator nominal operating set point to remove any inadvertent interchange and restore system frequency to 60 Hz. Classified Secondary Control.
 % kundur pic... p378 firug 9.1
+
 \begin{center}
+%	\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/models/AGC-TLB/AGC-TLB.pdf}
 \includegraphics[height=.55\textheight]{AGCblockdiagram}
 {\tiny\cite{Kundur}}
 \end{center}
@@ -302,9 +306,10 @@ Dynamic Variable: Area Control Error
 %\begin{columns}
 %	\begin{column}{.5\linewidth}
 		A steady state power system solution.\\% to all bus voltages, bus voltage angles, and real  and reactive power of a system.\\
+				
 		% A sonlution to a system of non-linear equations solved by iteration.
 		%\vspace{1em}
-		A \emph{snapshot} of a stable power system. \\% not dynamic
+		%A \emph{snapshot} of a stable power system. \\% not dynamic
 		
 %	\end{column}
 %	\begin{column}{.5\linewidth}
@@ -312,9 +317,11 @@ Dynamic Variable: Area Control Error
 \begin{center}
 	\includegraphics[width=.6\linewidth]{powerFlowSingle} 
 \end{center}
+	Software exists to solve power flows.
+Power flows are not dynamic. \\
 
-	
-		Power flows are not dynamic.
+
+
 %	\end{column}
 %\end{columns}
 
@@ -326,10 +333,28 @@ Power flows arranged in sequence to give the illusion of time.\\
 %\vspace{1em}
 %A \emph{flip book} of \emph{snapshots}.\\
 \begin{center}
-	\includegraphics[width=.8\linewidth]{powerFlowSequence}
+	\includegraphics[width=.6\linewidth]{powerFlowSequence}
 \end{center}
+Software does not exist.
 %\vspace{1em}
 %Dynamics calculated between power flows.%\\(i.e frequency, valve position, etc. )\\
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Custom Software}
+\begin{center}
+	\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/models/highLevelSoftware/highLevelSoftware}
+\end{center}
+
+High Level Software Notes:\\
+\begin{itemize}
+	\item Python and IronPython
+	\item Advance Message Queueing Protocol
+	\item Agent Based Modeling
+\end{itemize}
+
+
+
 \end{frame}
 %________________________________________________
 \subsection{Rational for Computational Approach}
@@ -340,9 +365,8 @@ Allows for:
 \begin{itemize}
 \item Simplifications
 \item Greater access to data
-\item Customizable models
-\item Modern programming language
-\item Further future work
+\item Customizable models in a modern programming language
+%\item Further future work
 \end{itemize}
 \end{frame}
 %************************************************
@@ -353,9 +377,9 @@ Allows for:
 \frametitle{So, what's happening?}
 Essentially:
 \begin{itemize}
-	\item Executing computer simulations of the western interconnection that are  over 10 minutes long.
-	\item Simulation `time steps' are a sequence of power flows (\emph{snapshots})
-	\item Additional dynamic calculations are performed between each `time step'.
+	\item Executing computer simulations of the grid that are  at least 10 minutes long.
+	\item Simulation time steps are a sequence of power flows.
+	\item Additional dynamic calculations are performed between each time step.
 \end{itemize}
 
 \end{frame}
@@ -379,7 +403,7 @@ To study engineering problems involving:
 \subsection{Quick Validation}
 %------------------------------------------------
 \begin{frame}
-\frametitle{Software Model}
+\frametitle{Validation Software Model}
 \framesubtitle{miniWECC}
 \begin{columns}
 	\begin{column}{0.45\textwidth}
@@ -480,21 +504,7 @@ To study engineering problems involving:
 \end{columns}
 \end{frame}
 %------------------------------------------------
-\begin{frame}
-\frametitle{Deadband and Valve Travel}
-\framesubtitle{Perturbance: -1500 MW power step in Area 3 at t=2}
-\begin{columns}
-\begin{column}{.5\linewidth}
-{\tiny Step Deadband}
-	\includegraphics[width=\linewidth]{genTripEqualRstepDBValveTravel01}
-\end{column}
-\begin{column}{.5\linewidth}
-{\tiny Non-Linear Droop Deadband}
-	\includegraphics[width=\linewidth]{genTripEqualRnonLinDBValveTravel01}
-\end{column}
-\end{columns}
-\end{frame}
-%------------------------------------------------
+
 %************************************************
 \section{Final Bits}
 %------------------------------------------------
@@ -536,6 +546,23 @@ To study engineering problems involving:
 
 
 \begin{comment} % Unused slides
+
+\begin{frame}
+\frametitle{Deadband and Valve Travel}
+\framesubtitle{Perturbance: -1500 MW power step in Area 3 at t=2}
+\begin{columns}
+\begin{column}{.5\linewidth}
+{\tiny Step Deadband}
+\includegraphics[width=\linewidth]{genTripEqualRstepDBValveTravel01}
+\end{column}
+\begin{column}{.5\linewidth}
+{\tiny Non-Linear Droop Deadband}
+\includegraphics[width=\linewidth]{genTripEqualRnonLinDBValveTravel01}
+\end{column}
+\end{columns}
+\end{frame}
+%------------------------------------------------
+
 %------------------------------------------------
 \subsection{Transient Simulation Differences}
 %------------------------------------------------
