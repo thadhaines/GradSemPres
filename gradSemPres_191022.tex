@@ -16,6 +16,14 @@
 \usepackage{graphicx}
 \graphicspath{ {figures/} }
 
+% For tables?
+\usepackage[per-mode=fraction]{siunitx} % for si units and num
+\usepackage{array} 		% for >{} column characterisctis
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+
 % bibiliography
 \usepackage[backend=biber,style=ieee, % bibliography style may be changed
 sorting=nyt % sorts by author, year, title
@@ -55,10 +63,11 @@ sorting=nyt % sorts by author, year, title
 %------------------------------------------------
 \begin{frame}
 \frametitle{What is a Power System?}
+Electrical supply connected to demand.\\ 
 \includegraphics[width=\linewidth]{largeGrid}{\tiny \cite{powersystemSVG} } % image  from https://www.ferc.gov/industries/electric/indus-act/reliability/blackout/ch1-3.pdf
 % and https://commons.wikimedia.org/wiki/File:Electricity_grid_simple-_North_America.svg
 % 3 Area MiniWECC picture?
-Electrical supply connected to demand.\\ \vspace{.25em}
+\\
 Research focus on transmission system.
 %\vspace{1em}
 %Power plants connected via transmission lines to cities in different areas. \\
@@ -179,12 +188,14 @@ Research focus on transmission system.
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-\frametitle{BA Action - Interchange Error} \ \vspace{.5em}
-$\approx$ Area Control Error
+\frametitle{BA Action - Error Tracking} \ \vspace{.5em}
+
 {\centering
 {\includegraphics[height=.6\textheight]{chart4}} {\tiny \cite{BAinformation} }% https://www.eia.gov/realtime_grid/#/data/graphs?end=20190704T18&start=20190627T18&bas=000001&regions=0&errSeriesType=S
 }
-
+{\footnotesize
+Area Control Error = Interchange Error + Frequency Error \\ (ACE)
+}
 \end{frame}
 %------------------------------------------------
 
@@ -271,12 +282,12 @@ Purpose: Adjust turbine mechanical power to arrest frequency decline.\\
 
 Dynamic Variable: Fuel Valve Position 
 % model of tgov1?
-{\centering\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/models/tgov1/tgov1}}
+{\centering\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/models/tgov1/tgov1DB}}
 
 \end{frame}
 %------------------------------------------------
 \begin{frame}
-\frametitle{Automatic Generation Control}
+\frametitle{Automatic Generation Control {\scriptsize(AGC)}}
 \framesubtitle{Secondary Control}
 
 Purpose: Eliminate Area Control Error\\
@@ -363,7 +374,8 @@ High Level Software Notes:\\
 \frametitle{Why use this method?}
 Allows for:
 \begin{itemize}
-\item Simplifications
+\item Appropriate detail for time frame
+\item Simplifications and Assumptions
 \item Greater access to data
 \item Customizable models in a modern programming language
 %\item Further future work
@@ -379,7 +391,7 @@ Essentially:
 \begin{itemize}
 	\item Executing computer simulations of the grid that are  at least 10 minutes long.
 	\item Simulation time steps are a sequence of power flows.
-	\item Additional dynamic calculations are performed between each time step.
+	\item Additional dynamics of interest are performed between each time step.
 \end{itemize}
 
 \end{frame}
@@ -391,8 +403,7 @@ To study engineering problems involving:
 	\item Long-term events (i.e. Wind Ramps)
 	\item Multi-Area Power Interactions
 	\begin{itemize}
-		\item Governor and AGC interaction
-		\item Governor and AGC settings		
+		\item Governor and AGC settings	and interactions
 	\end{itemize}
 	\item Ways to reduce machine effort while meeting reliability standards.
 \end{itemize}
@@ -416,7 +427,7 @@ To study engineering problems involving:
 		\end{itemize}
 	\end{column}
 	\begin{column}{.5\textwidth}
-		\includegraphics[height=.8\textheight]{miniWECCpres} 
+		\includegraphics[height=.8\textheight]{miniWECC_split03} 
 		{\tiny\cite{RJminiWECC}}% from RJ paper...
 	\end{column}
 \end{columns}
@@ -425,9 +436,9 @@ To study engineering problems involving:
 \begin{frame}
 \frametitle{Plot Explanation}\ \\
 \vspace{.25em}
-		\includegraphics[width=\linewidth]{comparisonsEx} 
+		\includegraphics[width=\linewidth]{comparisonPlotsExp} 
 		{\footnotesize
-		\[\text{PSDS}_{data}-\text{LTD}_{data} = \text{Deviation}_{data}\]
+		\[\text{PSDS}_{data}-\text{LTD}_{data} = \text{Difference}_{data}\]
 		%Percent difference
 		\[\%_{diff} = \dfrac{\abs{x-y}}{\frac{x+y}{2}}*100\% \]}
 \end{frame}
@@ -440,10 +451,10 @@ To study engineering problems involving:
 \framesubtitle{400 MW Load Step Frequency Comparison}
 \begin{columns}
 	\begin{column}{.5\linewidth}
-		\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/one-offs/final-validation-01/figures/miniWECC3ALTDstepF3}
+		\includegraphics[width=\linewidth]{miniWECC3ALTDstepF3}
 	\end{column}
 	\begin{column}{.5\linewidth}
-		\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/one-offs/final-validation-01/figures/miniWECC3ALTDstepRelF}
+		\includegraphics[width=\linewidth]{miniWECC3ALTDstepRelF}
 	\end{column}
 \end{columns}
 \end{frame}
@@ -453,10 +464,10 @@ To study engineering problems involving:
 \framesubtitle{400 MW Load Step Mechanical Power Comparison}
 \begin{columns}
 	\begin{column}{.5\linewidth}
-		\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/one-offs/final-validation-01/figures/miniWECC3ALTDstepPm2}
+		\includegraphics[width=\linewidth]{miniWECC3ALTDstepPm2}
 	\end{column}
 	\begin{column}{.5\linewidth}
-		\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/one-offs/final-validation-01/figures/miniWECC3ALTDstepPm3}
+		\includegraphics[width=\linewidth]{miniWECC3ALTDstepPm3}
 	\end{column}
 \end{columns}
 \end{frame}
@@ -466,10 +477,10 @@ To study engineering problems involving:
 \framesubtitle{20 second 400 MW Load Ramp Frequency Comparison}
 \begin{columns}
 	\begin{column}{.5\linewidth}
-		\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/one-offs/final-validation-01/figures/miniWECC3ALTDrampF3}
+		\includegraphics[width=\linewidth]{miniWECC3ALTDrampF3}
 	\end{column}
 	\begin{column}{.5\linewidth}
-		\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/one-offs/final-validation-01/figures/miniWECC3ALTDrampRelF}
+		\includegraphics[width=\linewidth]{miniWECC3ALTDrampRelF}
 	\end{column}
 \end{columns}
 \end{frame}
@@ -479,10 +490,10 @@ To study engineering problems involving:
 \framesubtitle{20 second 400 MW Load ramp Mechanical Power Comparison}
 \begin{columns}
 \begin{column}{.5\linewidth}
-	\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/one-offs/final-validation-01/figures/miniWECC3ALTDrampPm2}
+	\includegraphics[width=\linewidth]{miniWECC3ALTDrampPm2}
 \end{column}
 \begin{column}{.5\linewidth}
-	\includegraphics[width=\linewidth]{../../ResearchDocs/TEX/one-offs/final-validation-01/figures/miniWECC3ALTDrampPm3}
+	\includegraphics[width=\linewidth]{miniWECC3ALTDrampPm3}
 \end{column}
 \end{columns}
 \end{frame}
@@ -490,30 +501,36 @@ To study engineering problems involving:
 \subsection{Quick Controller Test}
 %------------------------------------------------
 \begin{frame}
-\frametitle{Area Droop and Valve Travel}
-\framesubtitle{Perturbance: -1500 MW power step in Area 3 at t=2}
+\frametitle{Governor Deadband}
+\begin{center}
+\includegraphics[height=.85\textheight]{dbAction2}
+\end{center}
+
+\end{frame}
+%------------------------------------------------
+\begin{frame}
+\frametitle{Noise Test}
+\framesubtitle{20 Minutes of 0.05\% Noise on all loads}
 \begin{columns}
 \begin{column}{.5\linewidth}
-{\tiny Area 3 droop = 0.2}
-	\includegraphics[width=\linewidth]{genTripHighRnoDBValveTravel01}
+\includegraphics[width=\linewidth]{miniWECCnoiseStepDBPload}
+\includegraphics[width=\linewidth]{miniWECCnoiseStepDBFreq}
+\includegraphics[width=\linewidth]{miniWECCnoiseNLDBFreq}
 \end{column}
 \begin{column}{.5\linewidth}
-{\tiny Area 3 droop = 0.05}
-	\includegraphics[width=\linewidth]{genTripEqualRnoDBValveTravel01}
+\includegraphics[width=\linewidth]{miniWECCnoiseRes01}
 \end{column}
 \end{columns}
 \end{frame}
-%------------------------------------------------
-
 %************************************************
 \section{Final Bits}
 %------------------------------------------------
 \begin{frame}
 \frametitle{Current Conclusions}
 \begin{itemize}
-	\item Software (PSLTDSim) output appears valid for tested systems.
-	\item Governor droop in one area affects how other areas respond.
-	\item Step deadband may increase valve travel.
+	\item PSLTDSim output appears valid on tested systems.
+	%\item Governor droop in one area affects how other areas respond.
+	\item Non-linear droop deadband may reduce valve travel by 2-3 times compared to a step deadband.
 	%\item Governor and AGC interactions can happen easily.
 	%\item Advanced control can be used to limit governor and AGC conflicts as well as reduce overall machine effort.
 \end{itemize}
@@ -546,6 +563,22 @@ To study engineering problems involving:
 
 
 \begin{comment} % Unused slides
+%------------------------------------------------
+\begin{frame}
+\frametitle{Area Droop and Valve Travel}
+\framesubtitle{Perturbance: -1500 MW power step in Area 3 at t=2}
+\begin{columns}
+\begin{column}{.5\linewidth}
+{\tiny Area 3 droop = 0.2}
+	\includegraphics[width=\linewidth]{genTripHighRnoDBValveTravel01}
+\end{column}
+\begin{column}{.5\linewidth}
+{\tiny Area 3 droop = 0.05}
+	\includegraphics[width=\linewidth]{genTripEqualRnoDBValveTravel01}
+\end{column}
+\end{columns}
+\end{frame}
+%-----------------------------------------------
 
 \begin{frame}
 \frametitle{Deadband and Valve Travel}
